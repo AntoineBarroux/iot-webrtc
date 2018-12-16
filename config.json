@@ -42,11 +42,11 @@
     "permanent" : false,
     "rec_dir" : "\/usr\/share\/janus\/recordings\/",
     "record" : false,
-    "room" : 1234,
+    "room" : 2,
     "room_description" : "",
     "room_pin" : "",
     "room_secret" : "",
-    "username" : "",
+    "username" : "rpi",
     "videocodec" : "vp8"
   }
 }

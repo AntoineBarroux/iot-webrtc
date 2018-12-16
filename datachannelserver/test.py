@@ -33,13 +33,13 @@ while True:
 
 
         while True:
-            data = connection.recv(16)
-            print 'received message"%s"' % data
+            data = connection.recv(1024)
+            print 'received message %s' % data
             time.sleep(0.01)
-            if data:
-                print 'echo data to client'
-                connection.sendall('hello ' + data)
-            else:
+            if not data:
+                #print 'echo data to client'
+                #connection.sendall('hello ' + data)
+#            else:
                 print 'no more data from', client_address
                 break
 
