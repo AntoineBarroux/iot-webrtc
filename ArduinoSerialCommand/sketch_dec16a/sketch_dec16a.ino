@@ -1,5 +1,3 @@
-#define SERIALCOMMAND_HARDWAREONLY 1
-
 
 #include <Servo.h>
 
@@ -13,7 +11,7 @@
 // support was added, and you don't need this next include: 
 //#include <SoftwareSerial.h>  
 
-#include "SerialCommand.h"
+#include "./SerialCommand.h"
 
 
 #define arduinoLED 13   // Arduino LED on board
