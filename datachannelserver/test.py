@@ -6,9 +6,21 @@
 
 import socket
 import time
-import os 
+import os
+import json
+from serial import Serial
+ 
 
 socket_path = '/tmp/uv4l.socket'
+serial_port = '/dev/ttyACM0'
+
+serial_port = Serial(port=serial_port, baudrate=9600)
+if serial_port.isOpen():
+	serial_port.close()
+serial_port.open()
+lu = serial_port.readline()
+chaine = lu.decode('ascii')
+print(chaine)
 
 try:
     os.unlink(socket_path)
@@ -19,29 +31,36 @@ except OSError:
 s = socket.socket(socket.AF_UNIX, socket.SOCK_SEQPACKET)
 
 
-print 'socket_path: %s' % socket_path
+print ('socket_path: %s' % socket_path)
 s.bind(socket_path)
 s.listen(1)
 
 
 while True:
-    print 'awaiting connection...'
+    print ('awaiting connection...')
     connection, client_address = s.accept()
-    print 'client_address %s' % client_address
+    print ('client_address %s' % client_address)
     try:
-        print 'established connection with', client_address
+        print ('established connection with', client_address)
 
 
         while True:
             data = connection.recv(1024)
-            print 'received message %s' % data
-            time.sleep(0.01)
+
             if not data:
-                #print 'echo data to client'
-                #connection.sendall('hello ' + data)
-#            else:
-                print 'no more data from', client_address
+                print ('no more data from', client_address)
                 break
+
+            try:
+                json_object = json.loads(data.decode())
+
+                print(json_object)
+            except ValueError as e:
+                print(e)
+
+            time.sleep(0.01)
+
+      
 
     finally:
         # Clean up the connection
