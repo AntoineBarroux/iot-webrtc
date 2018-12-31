@@ -7,7 +7,9 @@
         <title>UV4L WebRTC</title>
         <!--script src="https://raw.githubusercontent.com/dorukeker/gyronorm.js/master/dist/gyronorm.complete.min.js" async></script-->
         <!--script src="https://rawgit.com/dorukeker/gyronorm.js/master/dist/gyronorm.complete.min.js" async></script-->
+		<link rel="stylesheet" href="style.css"/>
         <script type="text/javascript">
+		
 
             function httpGetAsync(theUrl, callback) {
                 try {
@@ -1073,7 +1075,7 @@
         </script>
         <style>
             #container {
-                display: flex;
+              
                 flex-flow: row nowrap;
                 align-items: flex-end;
             }
@@ -1084,11 +1086,7 @@
             .overlayWrapper {
                 position: relative;
             }
-            .overlayWrapper .overlay {
-                position: absolute;
-                top: 0;
-                left: 5px;
-            }
+           
             p {
                 margin: 0.125em;
             }
@@ -1098,15 +1096,16 @@
         </style>
     </head>
     <body>
+	<div class="center">
         <h1>
             <span>Drive Camera motor Over WEBRTC data channel</span>
         </h1>
         <div id="container">
             <div class="overlayWrapper">
+				<p class="overlay" style="margin-bottom:5px;">Remote video</p>
                 <video id="remote-video" autoplay="" width="800" height="600">
                     Your browser does not support the video tag.
                 </video>
-                <p class="overlay">remote</p>
             </div>
         </div>
         <div id="controls">
@@ -1115,18 +1114,19 @@
             <button type=button id="fullscreen" onclick="fullscreen();">Fullscreen</button>
             <button type=button id="record" onclick="start_stop_record();" title="start or stop recording audio/video">Start Recording</button>
         </div>
+	</div>
         <div>
             <details id="record-detail">
                 <summary><b>Recorded Audio/Video stream</b></summary>
                 <div>
                     <div class="overlayWrapper">
+						<p class="overlay">Recorded video</p>
                         <video id="recorded-video" controls>
                             Your browser does not support the video tag.
                         </video>
-                        <p class="overlay">recorded</p>
                     </div>
                 </div>
-                <div>
+                <div style="text-align:center;">
                     <button type=button id="discard" onclick="discard_recording();" title="discard recorded audio/video">Discard</button>
                     <button type=button id="download" onclick="download();" title="save recorded audio/video">Save as</button>
                 </div>
@@ -1136,12 +1136,12 @@
             <details open>
                 <summary><b>Data Channels</b></summary>
                 <fieldset id="datachannels">
-                    <span>message: </span><input type="text" id="datamessage" value="" title="message to send to the remote peer"/>
+                    <span>Message to send : </span><input type="text" id="datamessage" value="" title="message to send to the remote peer"/>
                     <button id="datasend" onclick="send_message();">Send</button>
-                    <span>received: </span><input type="text" readonly="readonly" id="datareceived" size="40" title="data received from the remote peer"/><br>
-                    <label><input type="checkbox" onclick="orientationsend_selection();" id="orientationsend" name="orientationsend" title="send device orientation angles when they change">send device orientation angles alpha, beta, gamma</label>
-                    <label><input type="checkbox" onclick="keypresssend_selection();" id="keypresssend" name="keypresssend" title="send keyboard events. Assume US layout. For users with virtual keyboard: put the focus on the 'message' input text item.">send key codes (US layout)</label>
-                    <label><input type="checkbox" onclick="alert('not implemented yet');" id="mousesend" name="mousesend" title="send mouse events">send mouse events</label>
+                    <span style="margin-left:12px;">Message received : </span><input type="text" readonly="readonly" id="datareceived" size="40" title="data received from the remote peer"/><br>
+                    <label><input type="checkbox" onclick="orientationsend_selection();" id="orientationsend" name="orientationsend" title="send device orientation angles when they change">Send device orientation angles alpha, beta, gamma</label>
+                    <label><input type="checkbox" onclick="keypresssend_selection();" id="keypresssend" name="keypresssend" title="send keyboard events. Assume US layout. For users with virtual keyboard: put the focus on the 'message' input text item.">Send key codes (US layout)</label>
+                    <label><input type="checkbox" onclick="alert('not implemented yet');" id="mousesend" name="mousesend" title="send mouse events">Send mouse events</label>
                 </fieldset>
                 <!--fieldset id="localdatachannels">
                     <button id="datacreate" onclick="create_localdatachannel();">Create</button>
@@ -1153,9 +1153,9 @@
             <details>
                 <summary><b>Advanced options</b></summary>
                 <fieldset>
-                    <span>Remote Peer/Signalling Server Address: </span><input required type="text" id="signalling_server" value="127.0.0.1:8080" title="<host>:<port>, default address is autodetected"/><br>
+                    <span>Remote Peer/Signalling Server Address : </span><input required type="text" id="signalling_server" value="127.0.0.1:8080" title="<host>:<port>, default address is autodetected"/><br>
                     <span>Optional ICE Servers (STUN/TURN): </span><input type="text" id="ice_servers" value="" title="array of RTCIceServer objects as valid JSON string"/><br>
-                    <span>Trickle ICE: </span>
+                    <span>Trickle ICE : </span>
                     <select onclick="trickleice_selection();" id="trickleice" name="trickleice" title="enable trickle ice">
                         <option value="auto">auto</option>
                         <option value="true" selected="selected">true</option>
@@ -1163,8 +1163,10 @@
                     </select>
                 </fieldset>
             </details>
-            <button id="start" style="background-color: green; color: white" onclick="start();">Call!</button>
-            <button disabled id="stop" style="background-color: red; color: white" onclick="stop();">Hang up</button>
+			<div style="text-align:center;">
+            <button id="start" onclick="start();">Call !</button>
+            <button disabled id="stop" onclick="stop();">Hang up</button>
+			</div>
         </div><br>
     </body>
 </html>

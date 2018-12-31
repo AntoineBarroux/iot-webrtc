@@ -1,0 +1,66 @@
+@font-face{
+	font-family : 'Bebas Neue';
+	src: url('font/BebasNeue-Regular.ttf');
+}
+
+.center{
+	width:64%;
+	margin-left:auto;
+	margin-right:auto;
+	text-align:center;
+}
+#controls{
+	text-align:center;
+	width:100%;
+}
+.overlayWrapper{
+	text-align:center;
+}
+body{
+	background-color:#0099CC;
+	font-family:'Bebas Neue';
+}
+button{
+	color: #fff !important;
+	text-transform: uppercase;
+	background-color: rgba(0,68,204,0.5);
+	border-radius: 5px;
+	display: inline-block;
+	border-color:rgba(150,150,150,0.5);
+	height:30px;
+	font-family:'Bebas Neue';
+	font-size:20px;
+
+}
+button:hover{
+	background: rgba(128,0,128 ,1 );
+	letter-spacing: 3px;
+	transition: all 0.4s ease 0s;
+	
+}
+#start{
+	background-color:#42bc27;
+}
+#stop{
+	background-color:#e0354f;
+}
+#start:hover{
+	background-color:#1fa31d;
+}
+#stop:hover{
+	background-color:#7c0b0b;
+}
+summary{
+	margin-bottom:5px;
+}
+b{
+	font-size:18px;
+}
+fieldset{
+	border-color:rgba(0,68,204,0.7);
+	border-radius:10px;
+	
+}
+p{
+	font-size:22px;
+}
