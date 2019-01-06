@@ -63,7 +63,8 @@ while True:
                 alpha = json_object["do"]["alpha"]
                 if delta == None:
                     delta = 90 - int(alpha)
-                command = "L " + str(alpha + delta) + "\r";
+                command = "L " + str((alpha + delta)%180) + "\r";
+                print(command)
                 serial_port.write(command.encode())
             except ValueError as e:
                 expression = "^(T|L) \d+"
