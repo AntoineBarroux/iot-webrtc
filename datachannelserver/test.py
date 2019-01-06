@@ -8,6 +8,7 @@ import socket
 import time
 import os
 import json
+import re
 from serial import Serial
  
 
@@ -42,6 +43,7 @@ while True:
     print ('client_address %s' % client_address)
     try:
         print ('established connection with', client_address)
+        delta = None
 
 
         while True:
@@ -53,13 +55,24 @@ while True:
 
             try:
                 json_object = json.loads(data.decode())
-
-                print(json_object)
+                print(json_object["do"])
+                gamma = abs(json_object["do"]["gamma"])
+                top = int(-1.0889 * gamma + 109)
+                command = "T " + str(top) + "\r";
+                serial_port.write(command.encode())
+                alpha = json_object["do"]["alpha"]
+                if delta == None:
+                    delta = 90 - int(alpha)
+                command = "L " + str(alpha + delta) + "\r";
+                serial_port.write(command.encode())
             except ValueError as e:
-                print(e)
-
-            time.sleep(0.01)
-
+                expression = "^(T|L) \d+"
+                commande = data.decode()
+                if re.match(expression, commande):
+                    print(commande)
+                    commande +="\r"
+                    serial_port.write(commande.encode())
+                
       
 
     finally:
